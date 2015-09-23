@@ -532,6 +532,10 @@ namespace ServiceStack.Redis
                         ResetSendBuffer();
                         throw;
                     }
+                    if (outerEx is LicenseException)
+                    {
+                        throw outerEx;
+                    }
 
                     var ex = retryableEx ?? GetRetryableException(outerEx);
                     if (ex == null)
